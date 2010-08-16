@@ -25,6 +25,7 @@ import org.af.commons.logging.LoggingSystem;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mutoss.MuTossControl;
+import af.statguitoolkit.errorhandling.ErrorDialogSGTK;
 
 public class MuTossGUI extends JFrame implements WindowListener {
 
@@ -40,30 +41,28 @@ public class MuTossGUI extends JFrame implements WindowListener {
 	public MuTossMainPanel getMpanel() {
 		return mpanel;
 	}
+	
+	public static boolean debugOutput = false;
 
-	public static void startGUI() {
+	public static void startGUI(boolean debugOutput) {
+		MuTossGUI.debugOutput = debugOutput;
 		//UIManager.put("control", Color.PINK);
-		//UIManager.put("Panel.background", Color.PINK);
+		//UIManager.put("Panel.background", Color.PINK);		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				getGUI().setVisible(true);
+				getGUI(MuTossGUI.debugOutput).setVisible(true);
 			}
 		});		
 	}
 	
-	public static MuTossGUI getGUI() {
-		if (gui==null) {
-			gui = new MuTossGUI();
-		}
-		return gui;
+	public static void reportBug() {
+		initLogging(true);
+		ErrorHandler.getInstance().makeErrDialog("Reporting Error via reportBug()");
 	}
 	
-	protected MuTossGUI() {		
-		super("MuToss GUI");
-		setIconImage((new ImageIcon(getClass().getResource("/org/mutoss/images/mutoss.png"))).getImage());
-		
+	private static void initLogging(boolean debugOutput) {
 		String loggingProperties = "/commons-logging.properties";
-		if (System.getProperty("eclipse") != null) { loggingProperties = "/commons-logging-verbose.properties"; }
+		if (System.getProperty("eclipse") != null || debugOutput) { loggingProperties = "/commons-logging-verbose.properties"; }
 		
 		if (!LoggingSystem.alreadyInitiated()) {
 			LoggingSystem.init(
@@ -71,8 +70,26 @@ public class MuTossGUI extends JFrame implements WindowListener {
 					true,
 					false,
 					new ApplicationLog());
-			ErrorHandler.init("rohmeyer@small-projects.de", "http://www.algorithm-forge.com/report/bugreport.php", true, true, ErrorDialog.class);
+			ErrorHandler.init("rohmeyer@small-projects.de", "http://www.algorithm-forge.com/report/bugreport.php", true, true, ErrorDialogSGTK.class);
 		}
+	}
+
+	public static MuTossGUI getGUI(boolean debugOutput) {
+		if (gui==null) {
+			gui = new MuTossGUI(debugOutput);
+		}
+		return gui;
+	}
+	
+	public static MuTossGUI getGUI() {		
+		return getGUI(true);
+	}
+	
+	protected MuTossGUI(boolean debugOutput) {		
+		super("MuToss GUI");
+		setIconImage((new ImageIcon(getClass().getResource("/org/mutoss/images/mutoss.png"))).getImage());
+		
+		initLogging(debugOutput);
 		
 		//System.setOut(new PrintStream(new LoggingOutputStream(logger), true));
 		
@@ -128,7 +145,7 @@ public class MuTossGUI extends JFrame implements WindowListener {
 	}
 
 	public static void main(String[] args) {
-		startGUI();
+		startGUI(true);
 	}
 
 	@Override
