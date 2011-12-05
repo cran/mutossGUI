@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.af.commons.Localizer;
 import org.af.commons.errorhandling.ErrorDialog;
 import org.af.commons.logging.ApplicationLog;
 import org.af.commons.logging.LoggingSystem;
@@ -116,7 +114,26 @@ public class ErrorDialogSGTK extends ErrorDialog {
         return collapseStringArray(ss, "\n");
     }
 
-    
+    protected Hashtable<String, String> getInfoTable() {
+    	Hashtable<String, String> table = super.getInfoTable();
+    	String message = "";
+    	if (e!=null) {
+    		if (e instanceof Throwable) {
+        		message = ((Throwable)e).getMessage();        		
+        	} else {
+        		message = e.toString();
+        	}
+    	}
+    	String prefix = "";
+    	if (tfContact.getText().length()>2 || taDesc.getText().length()>2) {
+    		prefix = "A FILLED OUT ";
+    	}
+    	String subject = prefix+"mutoss ("+"unknown version"+") " +
+    			"bug report from "+System.getProperty("user.name", "<unknown user name>")+
+    			" on "+System.getProperty("os.name", "<unknown OS>")+" : "+    			
+    			(message.length()<40?message:message.substring(0, 37)+"...");
+    	table.put("Subject", subject);   	return table;
+    }
     
 }
 
