@@ -1,8 +1,8 @@
-ea5f04cb8b7c725499e97b750345ba45 *DESCRIPTION
-2995c7860eeaa72312b2dc23524ab186 *NAMESPACE
+d4ce7d74a4d0e80a05db0932280b8069 *DESCRIPTION
+eef400b7817298cd9872a9761287d378 *NAMESPACE
 22153468f3a2dbaae911b2ceb49f3fdb *R/helperfunctions.R
 9a46f9cf581a0768656e3c804a5f28a7 *R/mutossGUI.R
-b97c89e5dab5a9e395e2c982da5b03b2 *R/onLoad.R
+5e31b2739e88bbbaacdeaa217b81010e *R/onLoad.R
 e546f1059d7214905f4c236eb6ef8b3b *inst/build.xml
 f04724c6dea7b93613bb21508ab39ec9 *inst/java-src/Makevars
 a3710b86210aaf95f49eebebed2dc2f4 *inst/java-src/af/statguitoolkit/errorhandling/ErrorDialogSGTK.java
