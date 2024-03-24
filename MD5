@@ -1,8 +1,8 @@
-3a3216548263d62687fb1ed36d4c2d12 *DESCRIPTION
+6c1d432eb96e6174969218e4be92375d *DESCRIPTION
 e28ece457e398fba4eb1e8184eaf63c2 *NAMESPACE
 adf5fbd4885d2290710f4d921127c482 *R/helperfunctions.R
 b920f5ad97b9d36e697c5ecb8adc467b *R/mutossGUI.R
-c98e4d44b8cc5fc8d13bbc2b3abfbf3c *R/onLoad.R
+989e3d7703d41450b466a606f72952d5 *R/onLoad.R
 1e39a1a524a2d8933cec160a0e4227e9 *inst/java/mutossgui.jar
 f04724c6dea7b93613bb21508ab39ec9 *java/Makevars
 8b25a74a97dd2a291797edb29c8e085d *java/af/statguitoolkit/errorhandling/ErrorDialogChooseLevelBase.java
